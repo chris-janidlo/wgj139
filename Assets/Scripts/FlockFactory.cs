@@ -33,7 +33,8 @@ public class FlockFactory : Singleton<FlockFactory>
 
         for (int i = 0; i < flockSize; i++)
         {
-            var follower = Instantiate(
+            var follower = Instantiate
+            (
                 FollowerPrefab,
                 position + Random.insideUnitSphere * leader.InitialMaxRadius,
                 Quaternion.identity
