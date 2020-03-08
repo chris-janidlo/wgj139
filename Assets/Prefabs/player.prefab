@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 7547382543475600449}
   - component: {fileID: 4808489301855141831}
   - component: {fileID: 2516541916090124146}
+  - component: {fileID: 9128925834745210569}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -74,7 +75,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5012236059912933722}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5199890883795446651}
@@ -131,6 +132,47 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5012236059912933722}
   m_Enabled: 1
+--- !u!114 &9128925834745210569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5012236059912933722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75683f537b7e4c0c90d225a9f8e4ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ZOffsetByFollowerCount:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 3
+      inSlope: 0.41594535
+      outSlope: 0.41594535
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.020974707
+    - serializedVersion: 3
+      time: 60
+      value: 18
+      inSlope: 0.042089324
+      outSlope: 0.042089324
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.029611282
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ZOffsetTransition:
+    value: 0
+    Time: 0.4
+    Ease: 9
+  Player: {fileID: 8190078639481272404}
 --- !u!114 &8190078639481272404
 MonoBehaviour:
   m_ObjectHideFlags: 0

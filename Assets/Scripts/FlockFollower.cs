@@ -11,8 +11,6 @@ public class FlockFollower : PhysicsBehaviour
     public float LeaderChangeCooldown;
     public FlockLeader Leader;
 
-    public float MaxSpeed;
-
     [Tooltip("Distance at which two boids consider themselves overly crowded")]
     public float CrowdedDistance;
 
