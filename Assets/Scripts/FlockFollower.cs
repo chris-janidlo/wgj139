@@ -67,7 +67,7 @@ public class FlockFollower : PhysicsBehaviour
             perceivedCenterOfMass += boid.transform.position;
         }
 
-        perceivedCenterOfMass /= flock.Count() - 1;
+        perceivedCenterOfMass /= flock.Count();
 
         // 100 is an arbitrary factor
         return (perceivedCenterOfMass - transform.position) / 100f;
@@ -97,7 +97,7 @@ public class FlockFollower : PhysicsBehaviour
             perceivedAverageVelocity += boid.Rigidbody.velocity;
         }
 
-        perceivedAverageVelocity /= flock.Count() - 1;
+        perceivedAverageVelocity /= flock.Count();
 
         // 8 is an arbitrary factor
         return (perceivedAverageVelocity - Rigidbody.velocity) / 8;
