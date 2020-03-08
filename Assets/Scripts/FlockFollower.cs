@@ -25,7 +25,7 @@ public class FlockFollower : PhysicsBehaviour
         transform.rotation = Quaternion.Slerp
         (
             transform.rotation,
-            Leader.transform.rotation,
+            Quaternion.LookRotation(Rigidbody.velocity),
             0.2f
         );
     }
