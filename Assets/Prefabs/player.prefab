@@ -131,7 +131,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5012236059912933722}
   m_Enabled: 1
---- !u!114 &2133705434
+--- !u!114 &8190078639481272404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,15 +140,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1605244569602635648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f97355e2b871b434cb912b171e21ce21, type: 3}
+  m_Script: {fileID: 11500000, guid: e886852bbb499477d8c964394ec10711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Died:
+    m_PersistentCalls:
+      m_Calls: []
+  Followers: []
+  InitialMaxRadius: 10
+  MaxSpeed: 10
+  TurnSpeed: 4
   FlapButton: Flap
   TranslationalAxis: Translation
   PitchAxis: Pitch
   YawAxis: Yaw
   InversePitch: 1
-  Birb: {fileID: 1093100742881586035}
 --- !u!1001 &8513815388427993495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161,6 +167,11 @@ PrefabInstance:
       propertyPath: MaxSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1231403363251936434, guid: a903185c226824ed0837b19dd606a5da,
+        type: 3}
+      propertyPath: Leader
+      value: 
+      objectReference: {fileID: 8190078639481272404}
     - target: {fileID: 6945074622325552648, guid: a903185c226824ed0837b19dd606a5da,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -235,15 +246,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8513815388427993495}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1093100742881586035 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8722448460800682724, guid: a903185c226824ed0837b19dd606a5da,
-    type: 3}
-  m_PrefabInstance: {fileID: 8513815388427993495}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605244569602635648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d0b3a5cff24947b1aff6651ed1c8b32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

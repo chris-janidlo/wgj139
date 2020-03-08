@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class FlockLeader : Bird
+public class FlockLeader : PhysicsBehaviour
 {
+    public IEnumerable<PhysicsBehaviour> Flock => Followers.Append(this as PhysicsBehaviour);
+
     public UnityEvent Died;
 
-    public List<FlockFollower> Followers;
+    public List<FlockFollower> Followers = new List<FlockFollower>();
     public float InitialMaxRadius;
 
     void Update ()

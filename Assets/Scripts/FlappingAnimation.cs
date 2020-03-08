@@ -12,14 +12,16 @@ public class FlappingAnimation : MonoBehaviour
 
     IEnumerator Start ()
     {
-        int i = 0;
+        int i = Random.Range(0, Frames.Count);
+
+        yield return new WaitForSeconds(Random.Range(0, Frames.Count / (FPS * SpeedModifier)));
 
         while (true)
         {
-            yield return new WaitForSeconds(1 / (FPS * SpeedModifier));
-
             MeshFilter.mesh = Frames[i];
             i = (i + 1) % Frames.Count;
+
+            yield return new WaitForSeconds(1 / (FPS * SpeedModifier));
         }
     }
 }

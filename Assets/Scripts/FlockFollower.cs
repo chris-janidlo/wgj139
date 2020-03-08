@@ -3,18 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-public class FlockFollower : Bird
+[RequireComponent(typeof(BirdStealer))]
+public class FlockFollower : PhysicsBehaviour
 {
     public float LeaderChangeTimer { get; private set; }
 
     public float LeaderChangeCooldown;
     public FlockLeader Leader;
 
-    public LayerMask StealCheckMask;
+    public float MaxSpeed;
 
-    [Tooltip("How many birds to count as the cohort of \"local\" flock mates")]
-    public int LocalFlockSize;
+    [Tooltip("Distance at which two boids consider themselves overly crowded")]
+    public float CrowdedDistance;
 
     new Collider collider => GetComponent<Collider>();
 
@@ -22,37 +22,26 @@ public class FlockFollower : Bird
     {
         LeaderChangeTimer = Mathf.Max(LeaderChangeTimer - Time.deltaTime, 0);
 
-        List<Bird> localFlockMates = Leader.Followers.Append(Leader as Bird)
-            .OrderBy(b => Vector3.Distance(transform.position, b.transform.position))
-            .Take(LocalFlockSize)
-            .ToList();
-
-        int flapCount = 0;
-        float translationalSum = 0;
-        Vector2 rotationalSum = Vector2.zero;
-
-        foreach (var b in localFlockMates)
-        {
-            flapCount += b.FlapInput ? 1 : 0;
-            translationalSum += b.TranslationalInput;
-            rotationalSum += b.RotationalInput;
-        }
-
-        FlapInput = flapCount > LocalFlockSize / 2;
-        TranslationalInput = translationalSum / LocalFlockSize;
-        RotationalInput = rotationalSum / LocalFlockSize;
+        transform.rotation = Quaternion.Slerp
+        (
+            transform.rotation,
+            Quaternion.LookRotation(Rigidbody.velocity),
+            0.2f
+        );
     }
 
-    void OnCollisionEnter (Collision other)
+    void FixedUpdate ()
     {
-        FlockFollower otherBird = other.gameObject.GetComponent<FlockFollower>();
+        var flock = Leader.Flock.Where(b => b != this);
 
-        if (otherBird == null || otherBird.Leader == Leader || otherBird.LeaderChangeTimer > 0) return;
-
-        if (shouldSteal(other.collider) && !otherBird.shouldSteal(collider))
-        {
-            otherBird.SetLeader(Leader);
-        }
+        Rigidbody.velocity +=
+            cohesionRule(flock) +
+            separationRule(flock) +
+            alignmentRule(flock) +
+            followLeaderRule();
+        
+        if (Rigidbody.velocity.magnitude > MaxSpeed)
+            Rigidbody.velocity = Rigidbody.velocity.normalized * MaxSpeed;
     }
 
     public void SetLeader (FlockLeader newLeader)
@@ -62,16 +51,59 @@ public class FlockFollower : Bird
         Leader?.Followers?.Remove(this);
         newLeader.Followers.Add(this);
         Leader = newLeader;
+        GetComponent<BirdStealer>().Leader = newLeader;
 
         LeaderChangeTimer = LeaderChangeCooldown;
     }
 
-    bool shouldSteal (Collider otherBirdCollider)
+    Vector3 cohesionRule (IEnumerable<PhysicsBehaviour> flock)
     {
-        RaycastHit hit;
+        Vector3 perceivedCenterOfMass = Vector3.zero;
 
-        if (!Physics.Raycast(transform.position, transform.forward, out hit, 1000, StealCheckMask)) return false;
+        foreach (var boid in flock)
+        {
+            perceivedCenterOfMass += boid.transform.position;
+        }
 
-        return hit.collider == otherBirdCollider;
+        perceivedCenterOfMass /= flock.Count() - 1;
+
+        // 100 is an arbitrary factor
+        return (perceivedCenterOfMass - transform.position) / 100f;
+    }
+
+    Vector3 separationRule (IEnumerable<PhysicsBehaviour> flock)
+    {
+        Vector3 separationVelocity = Vector3.zero;
+
+        foreach (var boid in flock)
+        {
+            if (Vector3.Distance(boid.transform.position, transform.position) <= CrowdedDistance)
+            {
+                separationVelocity -= boid.transform.position - transform.position;
+            }
+        }
+
+        return separationVelocity;
+    }
+
+    Vector3 alignmentRule (IEnumerable<PhysicsBehaviour> flock)
+    {
+        Vector3 perceivedAverageVelocity = Vector3.zero;
+
+        foreach (var boid in flock)
+        {
+            perceivedAverageVelocity += boid.Rigidbody.velocity;
+        }
+
+        perceivedAverageVelocity /= flock.Count() - 1;
+
+        // 8 is an arbitrary factor
+        return (perceivedAverageVelocity - Rigidbody.velocity) / 8;
+    }
+
+    Vector3 followLeaderRule ()
+    {
+        // 8 is an arbitrary factor
+        return (Leader.transform.position - transform.position) / 8;
     }
 }

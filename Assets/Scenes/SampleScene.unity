@@ -375,11 +375,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerStartingFlockSize: 10
   EnemyFlockSizeRange: {x: 10, y: 40}
-  PlayerPrefab: {fileID: 1093100742881586035, guid: 6c1e4c1b702804a1fb916a9c45a8cb2f,
+  PlayerPrefab: {fileID: 8190078639481272404, guid: 6c1e4c1b702804a1fb916a9c45a8cb2f,
     type: 3}
-  EnemyLeaderPrefab: {fileID: 8722448460800682724, guid: a903185c226824ed0837b19dd606a5da,
+  EnemyLeaderPrefab: {fileID: 3749707731785683515, guid: 26815add79de74671a076343c1753c99,
     type: 3}
-  FollowerPrefab: {fileID: 1490364210866932318, guid: e01a0962ecae541c2a296b75688d602d,
+  FollowerPrefab: {fileID: 8915782092129490278, guid: a5b8b945d8a84457c8f643029be31048,
     type: 3}
 --- !u!114 &1118695494
 MonoBehaviour:

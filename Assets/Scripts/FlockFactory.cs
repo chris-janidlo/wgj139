@@ -8,7 +8,8 @@ public class FlockFactory : Singleton<FlockFactory>
     public int PlayerStartingFlockSize;
     public Vector2Int EnemyFlockSizeRange;
 
-    public FlockLeader PlayerPrefab, EnemyLeaderPrefab;
+    public Player PlayerPrefab;
+    public FlockLeader EnemyLeaderPrefab;
     public FlockFollower FollowerPrefab;
 
     void Awake ()
