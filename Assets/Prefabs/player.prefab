@@ -1,23 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &2133705434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605244569602635648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f97355e2b871b434cb912b171e21ce21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FlapButton: Flap
-  TranslationalAxis: Translation
-  PitchAxis: Pitch
-  YawAxis: Yaw
-  InversePitch: 1
-  Birb: {fileID: 9208328473824611829}
 --- !u!1 &3235952826015486552
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14e2f7dd9f63c4360b09daa9d1492c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  Target: {fileID: 1605244569602635679}
   OffsetFromTarget: {x: 0, y: 0, z: 0}
   MoveDelay: 0.5
   RotationFactor: 0.2
@@ -149,6 +131,24 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5012236059912933722}
   m_Enabled: 1
+--- !u!114 &2133705434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605244569602635648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97355e2b871b434cb912b171e21ce21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlapButton: Flap
+  TranslationalAxis: Translation
+  PitchAxis: Pitch
+  YawAxis: Yaw
+  InversePitch: 1
+  Birb: {fileID: 1093100742881586035}
 --- !u!1001 &8513815388427993495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ PrefabInstance:
     - target: {fileID: 6945074622325552663, guid: a903185c226824ed0837b19dd606a5da,
         type: 3}
       propertyPath: m_Name
-      value: player Variant
+      value: player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a903185c226824ed0837b19dd606a5da, type: 3}
@@ -235,15 +235,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8513815388427993495}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9208328473824611829 stripped
+--- !u!114 &1093100742881586035 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 715412674039450722, guid: a903185c226824ed0837b19dd606a5da,
+  m_CorrespondingSourceObject: {fileID: 8722448460800682724, guid: a903185c226824ed0837b19dd606a5da,
     type: 3}
   m_PrefabInstance: {fileID: 8513815388427993495}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605244569602635648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f40c54eb8e8914d18ae1ba7c492681c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d0b3a5cff24947b1aff6651ed1c8b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

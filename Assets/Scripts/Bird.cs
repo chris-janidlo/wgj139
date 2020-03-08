@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bird : MonoBehaviour
+[DisallowMultipleComponent]
+public abstract class Bird : MonoBehaviour
 {
     public bool FlapInput { get; set; }
     // scalar for z force on flap (ie you move forward a little on flap when this is positive, or back a little when negative)
