@@ -25,6 +25,8 @@ public class Player : FlockLeader
             Input.GetAxis(YawAxis),
             Input.GetAxis(PitchAxis) * (InversePitch ? -1 : 1)
         );
+
+        Debug.Log(Followers.Count);
     }
 
     void FixedUpdate ()

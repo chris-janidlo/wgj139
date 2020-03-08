@@ -35,13 +35,9 @@ public class FlockFollower : PhysicsBehaviour
         var flock = Leader.Flock.Where(b => b != this);
 
         Rigidbody.velocity +=
-            cohesionRule(flock) +
             separationRule(flock) +
             alignmentRule(flock) +
             followLeaderRule();
-        
-        if (Rigidbody.velocity.magnitude > MaxSpeed)
-            Rigidbody.velocity = Rigidbody.velocity.normalized * MaxSpeed;
     }
 
     public void SetLeader (FlockLeader newLeader)
@@ -56,21 +52,6 @@ public class FlockFollower : PhysicsBehaviour
         transform.parent = newLeader.transform.parent;
 
         LeaderChangeTimer = LeaderChangeCooldown;
-    }
-
-    Vector3 cohesionRule (IEnumerable<PhysicsBehaviour> flock)
-    {
-        Vector3 perceivedCenterOfMass = Vector3.zero;
-
-        foreach (var boid in flock)
-        {
-            perceivedCenterOfMass += boid.transform.position;
-        }
-
-        perceivedCenterOfMass /= flock.Count();
-
-        // 100 is an arbitrary factor
-        return (perceivedCenterOfMass - transform.position) / 100f;
     }
 
     Vector3 separationRule (IEnumerable<PhysicsBehaviour> flock)
