@@ -53,6 +53,8 @@ public class FlockFollower : PhysicsBehaviour
         Leader = newLeader;
         GetComponent<BirdStealer>().Leader = newLeader;
 
+        transform.parent = newLeader.transform.parent;
+
         LeaderChangeTimer = LeaderChangeCooldown;
     }
 

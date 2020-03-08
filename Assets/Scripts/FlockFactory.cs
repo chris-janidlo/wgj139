@@ -12,6 +12,8 @@ public class FlockFactory : Singleton<FlockFactory>
     public FlockLeader EnemyLeaderPrefab;
     public FlockFollower FollowerPrefab;
 
+    int index;
+
     void Awake ()
     {
         SingletonSetInstance(this, true);
@@ -30,6 +32,9 @@ public class FlockFactory : Singleton<FlockFactory>
     void spawnFlock (Vector3 position, FlockLeader leaderPrefab, int flockSize)
     {
         var leader = Instantiate(leaderPrefab, position, Quaternion.identity);
+        var container = new GameObject("flock container " + index++).transform;
+
+        leader.transform.parent = container;
 
         for (int i = 0; i < flockSize; i++)
         {
@@ -37,7 +42,8 @@ public class FlockFactory : Singleton<FlockFactory>
             (
                 FollowerPrefab,
                 position + Random.insideUnitSphere * leader.InitialMaxRadius,
-                Quaternion.identity
+                Quaternion.identity,
+                container
             );
 
             follower.SetLeader(leader);
