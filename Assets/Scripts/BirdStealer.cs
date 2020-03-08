@@ -8,13 +8,13 @@ public class BirdStealer : PhysicsBehaviour
 
     public LayerMask StealCheckMask;
 
-    void OnCollisionEnter (Collision other)
+    void OnTriggerEnter (Collider other)
     {
         FlockFollower otherBird = other.gameObject.GetComponent<FlockFollower>();
 
         if (otherBird == null || otherBird.Leader == Leader || otherBird.LeaderChangeTimer > 0) return;
 
-        if (shouldSteal(transform, other.collider) && !shouldSteal(other.transform, Collider))
+        if (shouldSteal(transform, other) && !shouldSteal(other.transform, Collider))
         {
             otherBird.SetLeader(Leader);
         }
