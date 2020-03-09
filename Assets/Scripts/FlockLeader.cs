@@ -14,11 +14,12 @@ public class FlockLeader : PhysicsBehaviour
     public List<FlockFollower> Followers = new List<FlockFollower>();
     public float InitialMaxRadius;
 
-    void Update ()
+    protected virtual void Update ()
     {
         if (Followers.Count == 0)
         {
             Destroy(gameObject);
+            Died?.Invoke();
             return;
         }
     }

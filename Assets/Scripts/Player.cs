@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using crass;
 
 public class Player : FlockLeader
 {
@@ -10,13 +12,22 @@ public class Player : FlockLeader
     public string FlapButton, TranslationalAxis, PitchAxis, YawAxis;
     public bool InversePitch = true;
 
+    public string GameOverScene;
+
+    public SmoothFollow CameraRig;
+
     bool flapInput { get; set; }
     // scalar for z force on flap (ie you move forward a little on flap when this is positive, or back a little when negative)
     float translationalInput { get; set; }
     // x is yaw, y is pitch
     Vector2 rotationalInput { get; set; }
 
-    void Update ()
+    void Start ()
+    {
+        Died.AddListener(gameover);
+    }
+
+    protected override void Update ()
     {
         flapInput = Input.GetButton(FlapButton);
         translationalInput = Input.GetAxis(TranslationalAxis);
@@ -27,6 +38,8 @@ public class Player : FlockLeader
         );
 
         Debug.Log(Followers.Count);
+
+        base.Update();
     }
 
     void FixedUpdate ()
@@ -52,5 +65,11 @@ public class Player : FlockLeader
     {
         // TODO: bird physics
         Rigidbody.velocity = transform.forward * MaxSpeed;
+    }
+
+    void gameover ()
+    {
+        Destroy(CameraRig.gameObject);
+        SceneManager.LoadScene(GameOverScene);
     }
 }

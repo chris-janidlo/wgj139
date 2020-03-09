@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f169ede8a8a964b72b9621e96597b767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStartingFlockSize: 10
+  PlayerStartingFlockSize: 1
   EnemyFlockSizeRange: {x: 10, y: 40}
   PlayerPrefab: {fileID: 8190078639481272404, guid: 6c1e4c1b702804a1fb916a9c45a8cb2f,
     type: 3}
