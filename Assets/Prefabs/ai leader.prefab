@@ -21,6 +21,7 @@ MonoBehaviour:
   MaximumSpeed: 30
   GiveUpDistance: 300
   DesiredMaximumDistance: 100
+  PlayerGuaranteedTargetChance: 0.4
   Patience: 5
 --- !u!1001 &3441052274628830248
 PrefabInstance:
