@@ -17,7 +17,7 @@ MonoBehaviour:
       m_Calls: []
   Followers: []
   InitialMaxRadius: 10
-  MaxSpeed: 0
+  MaxSpeed: 10
   TurnSpeed: 4
   FlapButton: Flap
   TranslationalAxis: Translation
