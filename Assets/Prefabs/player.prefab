@@ -17,8 +17,13 @@ MonoBehaviour:
       m_Calls: []
   Followers: []
   InitialMaxRadius: 10
+  Gravity: 10
   MaxSpeed: 10
   TurnSpeed: 4
+  FlapTime: 0.33333334
+  FlapBurst: 4
+  FlapHorizontalScale: 1
+  DragCoeff: 0.01
   FlapButton: Flap
   TranslationalAxis: Translation
   PitchAxis: Pitch

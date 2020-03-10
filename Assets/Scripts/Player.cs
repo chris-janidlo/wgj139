@@ -6,12 +6,20 @@ using crass;
 
 public class Player : FlockLeader
 {
+    [Header("Physics")]
+    public float Gravity;
     public float MaxSpeed, TurnSpeed;
 
-    Vector2 targetRotation;
-    public string FlapButton, TranslationalAxis, PitchAxis, YawAxis;
+    public float FlapTime, FlapBurst, FlapHorizontalScale;
+
+    public float DragCoeff = 1;
+
+    [Header("Controls")]
+    public string FlapButton;
+    public string TranslationalAxis, PitchAxis, YawAxis;
     public bool InversePitch = true;
 
+    [Header("Other")]
     public string GameOverScene;
 
     public SmoothFollow CameraRig;
@@ -21,6 +29,10 @@ public class Player : FlockLeader
     float translationalInput { get; set; }
     // x is yaw, y is pitch
     Vector2 rotationalInput { get; set; }
+
+    Vector2 targetRotation;
+
+    float flapTimer;
 
     void Start ()
     {
@@ -36,6 +48,8 @@ public class Player : FlockLeader
             Input.GetAxis(YawAxis),
             Input.GetAxis(PitchAxis) * (InversePitch ? -1 : 1)
         );
+
+        flapTimer -= Time.deltaTime;
 
         Debug.Log(Followers.Count);
 
@@ -63,8 +77,39 @@ public class Player : FlockLeader
 
     void translate ()
     {
-        // TODO: bird physics
-        Rigidbody.velocity = transform.forward * MaxSpeed;
+        if (flapTimer <= 0)
+        {
+            if (flapInput) flap();
+            else glide();
+        }
+
+        Rigidbody.AddForce(Vector3.down * Gravity, ForceMode.Acceleration);
+        Rigidbody.AddForce(-DragCoeff * Rigidbody.velocity.normalized * Rigidbody.velocity.sqrMagnitude);
+    }
+
+    void flap ()
+    {
+        flapTimer = FlapTime;
+
+        var flapDir = (Vector3.up + translationalInput * transform.forward * FlapHorizontalScale).normalized;
+
+        Rigidbody.AddForce(flapDir * FlapBurst, ForceMode.VelocityChange);
+    }
+
+    void glide ()
+    {
+        float verticality = Mathf.Abs(targetRotation.y) / 90;
+
+        Rigidbody.velocity = Vector3.Scale
+        (
+            transform.forward,
+            new Vector3
+            (
+                1 - verticality,
+                verticality,
+                1 - verticality
+            )
+        ).normalized * Rigidbody.velocity.magnitude;
     }
 
     void gameover ()
